@@ -42,6 +42,9 @@ class Publication:
 
 def load_pubs(config):
 
+    if not os.path.isdir(f'{content_dir}/publications/'):
+        return list()
+
     pubs = list()
 
     content_dir = config['content_dir']
@@ -78,6 +81,9 @@ class Post:
 
 
 def load_posts(config):
+
+    if not os.path.isdir(f'{content_dir}/posts/'):
+        return list()
 
     posts = list()
 
