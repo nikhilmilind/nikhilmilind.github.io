@@ -16,6 +16,7 @@ jobs:
           activate-environment: academic
           environment-file: env.yaml
           auto-activate-base: false
+          activate-environment: academic
       - name: Test conda
         run: |
           conda info
