@@ -79,7 +79,8 @@ def render_output():
 
     # Recreate the output directory
     output_dir = config['output_dir']
-    shutil.rmtree(output_dir)
+    if os.path.isdir(output_dir):
+        shutil.rmtree(output_dir)
     os.mkdir(output_dir)
     os.mkdir(f'{output_dir}/publications/')
 

@@ -1,27 +1,62 @@
 name: Build Action
+
 on:
   push:
     branches: [ "main" ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
-  build:
+
+  deploy:
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     runs-on: ubuntu-latest
+
     steps:
+
       - name: Check out repository code
         uses: actions/checkout@v4
+
       - name: List files in the repository
         run: ls ${{ github.workspace }}
+
       - name: Configure conda
         uses: conda-incubator/setup-miniconda@v3
         with:
           environment-file: env.yaml
           activate-environment: academic
           auto-activate-base: false
+
       - name: Test conda
         shell: bash -el {0}
         run: |
           conda info
+
       - name: Compile
         shell: bash -el {0}
         run: |
           cd ${{ github.workspace }}
           python engine.py render
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'output/'
+          
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
