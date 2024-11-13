@@ -17,8 +17,11 @@ jobs:
           activate-environment: academic
           auto-activate-base: false
       - name: Test conda
+        shell: bash -el {0}
         run: |
-          which python
-          conda init
-          conda activate academic
-          which python
+          conda info
+      - name: Compile
+        shell: bash -el {0}
+        run: |
+          cd ${{ github.workspace }}
+          python engine.py render
