@@ -32,7 +32,8 @@ def read_markdown(file_path):
             data_md += line
             data_md += '\n'
 
-    md_html = markdown.markdown(data_md)
+    md_processor = markdown.Markdown(extensions=['src.mathjax', 'codehilite', 'fenced_code'])
+    md_html = md_processor.convert(data_md)
     md_meta = yaml.safe_load(data_yaml)
 
     if md_meta is None:

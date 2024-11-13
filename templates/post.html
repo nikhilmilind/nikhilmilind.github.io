@@ -7,18 +7,15 @@
         <div class="container-fluid mt-5 mb-5">
 
             <h3>{{ meta.title|e }}</h3>
-            <p>{{ meta.authors|join(', ') }}</p>
             <p>{{ meta.date.strftime('%-d %B %Y') }}</p>
-
-            <a class="btn btn-light" href="https://doi.org/{{ meta.doi }}" target="_blank" role="button">
-                DOI
-            </a>
 
         </div>
 
+        <hr>
+
         <div class="container-fluid">
 
-            {{ content_pub }}
+            {{ content_post }}
 
         </div>
 

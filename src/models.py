@@ -66,3 +66,41 @@ def top_pubs(pubs, n=5):
 
     sorted_pubs = sorted(pubs, key=lambda pub: pub.date, reverse=True)
     return sorted_pubs[:5]
+
+
+class Post:
+
+    def __init__(self, title, date, url):
+
+        self.title = title
+        self.date = date
+        self.url = url
+
+
+def load_posts(config):
+
+    posts = list()
+
+    content_dir = config['content_dir']
+
+    for post_md in os.listdir(f'{content_dir}/posts/'):
+
+        post_meta, _ = read_markdown(f'{content_dir}/posts/{post_md}')
+
+        if 'title' not in post_meta:
+            raise ValueError('The title property is required for a post!')
+        if 'date' not in post_meta:
+            raise ValueError('The date property is required for a post!')
+
+        post = pathlib.Path(post_md).with_suffix('')
+        post_obj = Post(post_meta['title'], post_meta['date'], f'/posts/{post}.html')
+        posts.append(post_obj)
+
+    return posts
+
+
+def top_posts(posts, n=5):
+
+    sorted_posts = sorted(posts, key=lambda post: post.date, reverse=True)
+    return sorted_posts[:5]
+

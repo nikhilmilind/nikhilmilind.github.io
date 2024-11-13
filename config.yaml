@@ -3,6 +3,7 @@ server_port: 8000
 index_template: index.html
 page_template: page.html
 pub_template: pub.html
+post_template: post.html
 
 output_dir: output/
 templates_dir: templates/
@@ -13,3 +14,4 @@ page_title: Nikhil Milind
 
 pages:
  - publications
+ - data

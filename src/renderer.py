@@ -1,11 +1,33 @@
 from src.reader import load_config, read_markdown
-from src.models import load_pages, load_pubs, top_pubs
+from src.models import load_pages, load_pubs, top_pubs, load_posts, top_posts
 
 import os
 import pathlib
 import shutil
 
 from jinja2 import Environment, FileSystemLoader
+
+
+def render_post(config, base_context, env, post_md):
+
+    post_template = config['post_template']
+    template = env.get_template(post_template)
+    
+    content_dir = config['content_dir']
+    post_meta, post_content = read_markdown(f'{content_dir}/posts/{post_md}')
+
+    context = dict()
+    context['config'] = config
+    context['meta'] = post_meta
+    context = context | base_context
+    context['content_post'] = post_content
+
+    rendered_html = template.render(context)
+
+    output_dir = config['output_dir']
+    post = pathlib.Path(post_md).with_suffix('')
+    with open(f'{output_dir}/posts/{post}.html', 'w') as f_out:
+        f_out.write(rendered_html)
 
 
 def render_pub(config, base_context, env, pub_md):
@@ -83,6 +105,7 @@ def render_output():
         shutil.rmtree(output_dir)
     os.mkdir(output_dir)
     os.mkdir(f'{output_dir}/publications/')
+    os.mkdir(f'{output_dir}/posts/')
 
     # Copy static files from templates and content
     templates_dir = config['templates_dir']
@@ -99,6 +122,8 @@ def render_output():
     base_context['pages'] = load_pages(config)
     base_context['pubs'] = load_pubs(config)
     base_context['top_pubs'] = top_pubs(base_context['pubs'])
+    base_context['posts'] = load_posts(config)
+    base_context['top_posts'] = top_posts(base_context['posts'])
 
     # Render the index page
     render_index(config, base_context, env)
@@ -110,3 +135,6 @@ def render_output():
     # Render all publications
     for pub_md in os.listdir(f'{content_dir}/publications/'):
         render_pub(config, base_context, env, pub_md)
+
+    for post_md in os.listdir(f'{content_dir}/posts/'):
+        render_post(config, base_context, env, post_md)
