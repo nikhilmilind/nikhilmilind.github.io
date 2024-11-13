@@ -19,5 +19,6 @@ jobs:
       - name: Test conda
         run: |
           which python
+          conda init
           conda activate academic
           which python

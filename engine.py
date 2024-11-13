@@ -8,7 +8,7 @@ import click
 @click.group()
 def cli():
 
-    read_markdown('content/profile/index.md')
+    pass
 
 
 @cli.command()
