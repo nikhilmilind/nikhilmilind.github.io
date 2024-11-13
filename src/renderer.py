@@ -133,8 +133,11 @@ def render_output():
         render_page(config, base_context, env, page)
 
     # Render all publications
-    for pub_md in os.listdir(f'{content_dir}/publications/'):
-        render_pub(config, base_context, env, pub_md)
+    if os.path.isdir(f'{content_dir}/publications/'):
+        for pub_md in os.listdir(f'{content_dir}/publications/'):
+            render_pub(config, base_context, env, pub_md)
 
-    for post_md in os.listdir(f'{content_dir}/posts/'):
-        render_post(config, base_context, env, post_md)
+    # Render all posts
+    if os.path.isdir(f'{content_dir}/posts/'):
+        for post_md in os.listdir(f'{content_dir}/posts/'):
+            render_post(config, base_context, env, post_md)
