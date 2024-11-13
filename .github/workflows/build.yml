@@ -14,7 +14,7 @@ jobs:
         uses: conda-incubator/setup-miniconda@v3
         with:
           activate-environment: academic
-          environment-file: academic.yml
+          environment-file: env.yaml
           auto-activate-base: false
       - name: Test conda
         run: |
