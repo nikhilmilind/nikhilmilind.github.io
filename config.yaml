@@ -1,0 +1,14 @@
+server_port: 8000
+
+index_template: index.html
+page_template: page.html
+pub_template: pub.html
+
+output_dir: output/
+templates_dir: templates/
+content_dir: content/
+
+site_name: Nikhil Milind
+page_title: Nikhil Milind
+
+pages: []
