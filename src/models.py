@@ -42,12 +42,12 @@ class Publication:
 
 def load_pubs(config):
 
+    content_dir = config['content_dir']
+
     if not os.path.isdir(f'{content_dir}/publications/'):
         return list()
 
     pubs = list()
-
-    content_dir = config['content_dir']
 
     for pub_md in os.listdir(f'{content_dir}/publications/'):
 
@@ -82,12 +82,12 @@ class Post:
 
 def load_posts(config):
 
+    content_dir = config['content_dir']
+
     if not os.path.isdir(f'{content_dir}/posts/'):
         return list()
 
     posts = list()
-
-    content_dir = config['content_dir']
 
     for post_md in os.listdir(f'{content_dir}/posts/'):
 
