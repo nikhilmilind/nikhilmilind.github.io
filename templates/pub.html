@@ -2,15 +2,25 @@
 
 {% block content %}
 
-    <div class="container-md mt-5" style="max-width: 800px;">
+    <div class="container-md" style="margin-top: 5em; max-width: 800px;">
 
-        <h2>{{ meta.title|e }}</h2>
-        <p>{{ meta.authors|join(', ') }}</p>
-        <p>{{ meta.date|e }}</p>
+        <div class="container-fluid mt-5 mb-5">
 
-        {{ content_pub }}
+            <h3>{{ meta.title|e }}</h3>
+            <p>{{ meta.authors|join(', ') }}</p>
+            <p>{{ meta.date.strftime('%-d %B %Y') }}</p>
 
-        <a class="btn btn-light" href="https://doi.org/{{ meta.doi }}" target="_blank" role="button">DOI</a>
+            <a class="btn btn-light" href="https://doi.org/{{ meta.doi }}" target="_blank" role="button">
+                DOI
+            </a>
+
+        </div>
+
+        <div class="container-fluid text-justify">
+
+            {{ content_pub }}
+
+        </div>
 
     </div>
 

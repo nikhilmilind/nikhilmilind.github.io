@@ -11,4 +11,5 @@ content_dir: content/
 site_name: Nikhil Milind
 page_title: Nikhil Milind
 
-pages: []
+pages:
+ - publications

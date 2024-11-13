@@ -1,6 +1,5 @@
 import os
 import pathlib
-import datetime
 
 from src.reader import read_markdown
 
