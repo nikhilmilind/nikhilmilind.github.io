@@ -8,6 +8,14 @@ name: Software and Data
 
 We use rare variant burden tests to estimate monotonicity and trait buffering. Scripts to accomplish this can be found [here](https://zenodo.org/records/13864152).
 
+#### CHEERS Update
+
+CHEERS was a tool written to test for enrichment of SNPs in ATAC-seq peaks specific to cell types. I rewrote this tool for Python 3 and made it more efficient. It can be found on a separate branch [here](https://github.com/TrynkaLab/CHEERS/tree/python3).
+
+#### LeanGoShifter
+
+[goshifter](https://github.com/immunogenomics/goshifter) was a tool written to test the enrichment of GWAS loci in genomic annotations. I rewrote the basic functionality in Python 3 to make it more efficient. It can be found [here](https://github.com/nikhilmilind/LeanGoShifter).
+
 # Data
 
 #### CNV GDRC Paper
