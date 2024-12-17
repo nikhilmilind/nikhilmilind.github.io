@@ -4,7 +4,8 @@ name: Publications
 
 # Pre-prints
 
-1. **Milind N**, Smith CJ, Zhu H, Spence JP, Pritchard JK. Buffering and non-monotonic behavior of gene dosage response curves for human complex traits. 2024. _medRxiv_. DOI: [10.1101/2024.11.11.24317065](https://doi.org/10.1101/2024.11.11.24317065).
+1. Spence JP, Mostafavi H, Ota M, **Milind N**, ..., Pritchard JK. Specificity, length, and luck: How genes are prioritized by rare and common variant association studies. 2024. _bioRxiv_. DOI: [10.1101/2024.12.12.628073](https://doi.org/10.1101/2024.12.12.628073).
+2. **Milind N**, Smith CJ, Zhu H, Spence JP, Pritchard JK. Buffering and non-monotonic behavior of gene dosage response curves for human complex traits. 2024. _medRxiv_. DOI: [10.1101/2024.11.11.24317065](https://doi.org/10.1101/2024.11.11.24317065).
 
 # Publications
 
