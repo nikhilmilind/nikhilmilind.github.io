@@ -48,7 +48,8 @@ $$
 \begin{align}
     \log \int_a^b f(x) \, dx &\approx \log \left( \sum_{i=1}^N w_i f(x_i) \Delta x \right) \\
     &= \log \sum_{i=1}^N \exp \left[ \log \left( w_i f(x_i) \Delta x \right) \right] \\
-    &= \mathrm{LogSumExp} \left\lbrace \log w_i + \log f(x_i) + \log \Delta x \right\rbrace_{i=1}^N \,.
+    &= \mathrm{LogSumExp} \left\lbrace \log w_i + \log f(x_i) + \log \Delta x \right\rbrace_{i=1}^N 
+    \,.
 \end{align}
 $$
 
@@ -138,7 +139,8 @@ $$
 Under this transformation, the interval $(-\infty, \infty)$ maps to $[0, 1]$. Furthermore,
 
 $$
-\int_{\mathbb{R}} f(x) \, dx = \int_0^1 \frac{k}{u(1-u)} f \left( k \mathrm{logit}(u) \right) \, du \,.
+\int_{\mathbb{R}} f(x) \, dx = \int_0^1 \frac{k}{u(1-u)} f \left( k \mathrm{logit}(u) \right) \, 
+du \,.
 $$
 
 In log space, with a grid of equidistant points $u_1, ..., u_N$ over $[0, 1]$,
@@ -147,8 +149,8 @@ $$
 \begin{align}
     \log \int_{\mathbb{R}} f(x) \, dx &= \log \int_0^1 \frac{k}{u(1-u)} f \left( k \mathrm{logit} 
     (u) \right) \, du \\
-    &\approx \mathrm{LogSumExp} \left\lbrace \log w_i + \log k - \log u_i - \log (1 - u_i) + \log f \left( 
-        k \mathrm{logit} (u_i) \right) + \log \Delta u \right\rbrace_{i=1}^N \,.
+    &\approx \mathrm{LogSumExp} \left\lbrace \log w_i + \log k - \log u_i - \log (1 - u_i) + \log f 
+    \left( k \mathrm{logit} (u_i) \right) + \log \Delta u \right\rbrace_{i=1}^N \,.
 \end{align}
 $$
 
@@ -183,7 +185,8 @@ $$
 The log evidence is then
 
 $$
-\log \prod_{i=1}^n p(x_i \mid \theta) = -\sum_{i=1}^n \frac{1}{2} \log (4\pi) + \frac{1}{4}(x_i - \theta)^2
+\log \prod_{i=1}^n p(x_i \mid \theta) = -\sum_{i=1}^n \frac{1}{2} \log (4\pi) + \frac{1}{4}(x_i -
+\theta)^2
 $$
 
 I simulated some data under this model using the following code.
@@ -215,7 +218,11 @@ print(integrator.integrate(lambda u: log_integrand(u, x[0], theta)))
 print(jsp.stats.norm.logpdf(x[0], loc=theta, scale=jnp.sqrt(2)))
 ```
 
-The output from both is around -1.43 for both, so the quadrature is working as expected! Now, I should be able to ascent the log evidence using numerical gradients provided by `jax`. I used the `optax` library to perform stochastic gradient ascent on the log evidence. The resulting estimate is $\hat{\theta} \approx 5.03$, which is pretty close to the simulated $\theta = 5$. I could test the convergence using multiple simulations and building confidence intervals.
+The output is around -1.43 for both, so the quadrature is working as expected! Now, I should be able
+to ascend the log evidence using numerical gradients provided by `jax`. I used the `optax` library
+to perform stochastic gradient ascent on the log evidence. The resulting estimate is $\hat{\theta}
+\approx 5.03$, which is pretty close to the simulated $\theta = 5$. I could test the convergence
+using multiple simulations and building confidence intervals.
 
 ```python
 import optax
