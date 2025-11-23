@@ -6,41 +6,57 @@
 
         <h2>Pre-Prints</h2>
 
-        <ol>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col"><strong>Citation</strong></th>
+                    <th scope="col"><strong>DOI</strong></th>
+                </tr>
+            </thead>
+            <tbody>
 
-            {% for pub in pubs|sort(attribute="date", reverse=True) %}
+                {% for pub in pubs|sort(attribute="date", reverse=True) %}
+                
+                    {% if pub.preprint %}
 
-                {% if pub.preprint %}
+                        <tr onclick="window.location='{{ pub.url }}';" style="cursor: pointer;">
+                            <td>{{ pub.authors|pub_author_fmt }}. {{ pub.title|e }}. {{ pub.date.year|e }}. <i>{{ pub.journal|e }}</i>.</th>
+                            <td><a href="https://doi.org/{{ pub.doi }}" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>
+                        </tr>
 
-                    <li>
-                        {{ pub.authors|pub_author_fmt }}. {{ pub.title|e }}. {{ pub.date.year|e }}. <i>{{ pub.journal|e }}</i>.
-                        DOI: <a href="https://doi.org/{{ pub.doi }}" target="_blank">{{ pub.doi|e }}</a>.
-                    </li>
+                    {% endif %}
 
-                {% endif %}
-
-            {% endfor %}
-
-        </ol>
+                {% endfor %}
+                
+            </tbody>
+        </table>
 
         <h2>Publications</h2>
 
-        <ol>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col"><strong>Citation</strong></th>
+                    <th scope="col"><strong>DOI</strong></th>
+                </tr>
+            </thead>
+            <tbody>
 
-            {% for pub in pubs|sort(attribute="date", reverse=True) %}
+                {% for pub in pubs|sort(attribute="date", reverse=True) %}
+                
+                    {% if not pub.preprint %}
 
-                {% if not pub.preprint %}
+                        <tr onclick="window.location='{{ pub.url }}';" style="cursor: pointer;">
+                            <td>{{ pub.authors|pub_author_fmt }}. {{ pub.title|e }}. {{ pub.date.year|e }}. <i>{{ pub.journal|e }}</i>.</th>
+                            <td><a href="https://doi.org/{{ pub.doi }}" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>
+                        </tr>
 
-                    <li>
-                        {{ pub.authors|pub_author_fmt }}. {{ pub.title|e }}. {{ pub.date.year|e }}. <i>{{ pub.journal|e }}</i>.
-                        DOI: <a href="https://doi.org/{{ pub.doi }}" target="_blank">{{ pub.doi|e }}</a>.
-                    </li>
+                    {% endif %}
 
-                {% endif %}
-
-            {% endfor %}
-
-        </ol>
+                {% endfor %}
+                
+            </tbody>
+        </table>
 
     </div>
 

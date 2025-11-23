@@ -238,7 +238,7 @@ theta_hat = jnp.array(0.0)
 optimizer = optax.adam(1E-1)
 opt_state = optimizer.init(theta_hat)
 
-for i in (pbar := tqdm.trange(30)):
+for i in tqdm.trange(30):
    for x_obs in x:
         loss_val, loss_grad = loss_val_grad(theta_hat, x_obs)
         updates, opt_state = optimizer.update(loss_grad, opt_state)
