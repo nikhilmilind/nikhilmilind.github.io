@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="container-md" style="margin-top: 5em; max-width: 800px;">
+
+        <h2>Pre-Prints</h2>
+
+        <ol>
+
+            {% for pub in pubs|sort(attribute="date", reverse=True) %}
+
+                {% if pub.preprint %}
+
+                    <li>
+                        {{ pub.authors|pub_author_fmt }}. {{ pub.title|e }}. {{ pub.date.year|e }}. <i>{{ pub.journal|e }}</i>.
+                        DOI: <a href="https://doi.org/{{ pub.doi }}" target="_blank">{{ pub.doi|e }}</a>.
+                    </li>
+
+                {% endif %}
+
+            {% endfor %}
+
+        </ol>
+
+        <h2>Publications</h2>
+
+        <ol>
+
+            {% for pub in pubs|sort(attribute="date", reverse=True) %}
+
+                {% if not pub.preprint %}
+
+                    <li>
+                        {{ pub.authors|pub_author_fmt }}. {{ pub.title|e }}. {{ pub.date.year|e }}. <i>{{ pub.journal|e }}</i>.
+                        DOI: <a href="https://doi.org/{{ pub.doi }}" target="_blank">{{ pub.doi|e }}</a>.
+                    </li>
+
+                {% endif %}
+
+            {% endfor %}
+
+        </ol>
+
+    </div>
+
+{% endblock content %}

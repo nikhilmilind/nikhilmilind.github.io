@@ -1,5 +1,6 @@
 from src.reader import load_config, read_markdown
-from src.models import load_pages, load_pubs, top_pubs, load_posts, top_posts
+from src.models import load_pages, load_pubs, load_posts
+from src.filters import pub_author_fmt
 
 import os
 import pathlib
@@ -49,6 +50,23 @@ def render_pub(config, base_context, env, pub_md):
     output_dir = config['output_dir']
     pub = pathlib.Path(pub_md).with_suffix('')
     with open(f'{output_dir}/publications/{pub}.html', 'w') as f_out:
+        f_out.write(rendered_html)
+
+
+def render_publications(config, base_context, env):
+
+    publications_template = config['publications_template']
+    template = env.get_template(publications_template)
+
+    context = dict()
+    context['config'] = config
+    context = context | base_context
+    context['page'] = 'publications'
+
+    rendered_html = template.render(context)
+
+    output_dir = config['output_dir']
+    with open(f'{output_dir}/{publications_template}', 'w') as f_out:
         f_out.write(rendered_html)
 
 
@@ -116,17 +134,19 @@ def render_output():
 
     # Create a new Jinja environment for templating
     env = Environment(loader=FileSystemLoader(templates_dir))
+    env.filters['pub_author_fmt'] = pub_author_fmt
 
     # Create base context
     base_context = dict()
     base_context['pages'] = load_pages(config)
     base_context['pubs'] = load_pubs(config)
-    base_context['top_pubs'] = top_pubs(base_context['pubs'])
     base_context['posts'] = load_posts(config)
-    base_context['top_posts'] = top_posts(base_context['posts'])
 
     # Render the index page
     render_index(config, base_context, env)
+
+    # Render the publications list page
+    render_publications(config, base_context, env)
 
     # Render all pages
     for page in config['pages']:

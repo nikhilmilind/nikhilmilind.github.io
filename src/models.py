@@ -33,10 +33,14 @@ def load_pages(config):
 
 class Publication:
 
-    def __init__(self, title, date, url):
+    def __init__(self, title, preprint, authors, journal, date, doi, url):
 
         self.title = title
+        self.preprint = preprint
+        self.authors = authors
+        self.journal = journal
         self.date = date
+        self.doi = doi
         self.url = url
 
 
@@ -53,22 +57,20 @@ def load_pubs(config):
 
         pub_meta, _ = read_markdown(f'{content_dir}/publications/{pub_md}')
 
-        if 'title' not in pub_meta:
-            raise ValueError('The title property is required for a page!')
-        if 'date' not in pub_meta:
-            raise ValueError('The date property is required for a page!')
+        required_properties = ['title', 'preprint', 'authors', 'journal', 'date', 'doi']
+        for property in required_properties:
+            if property not in pub_meta:
+                raise ValueError(f'The {property} property is required for a page!')
+
+        pub_kwargs = {property: pub_meta[property] for property in required_properties}
 
         pub = pathlib.Path(pub_md).with_suffix('')
-        pub_obj = Publication(pub_meta['title'], pub_meta['date'], f'/publications/{pub}.html')
+        pub_kwargs['url'] = f'/publications/{pub}.html'
+
+        pub_obj = Publication(**pub_kwargs)
         pubs.append(pub_obj)
 
     return pubs
-
-
-def top_pubs(pubs, n=5):
-
-    sorted_pubs = sorted(pubs, key=lambda pub: pub.date, reverse=True)
-    return sorted_pubs[:5]
 
 
 class Post:
@@ -103,10 +105,4 @@ def load_posts(config):
         posts.append(post_obj)
 
     return posts
-
-
-def top_posts(posts, n=5):
-
-    sorted_posts = sorted(posts, key=lambda post: post.date, reverse=True)
-    return sorted_posts[:5]
 

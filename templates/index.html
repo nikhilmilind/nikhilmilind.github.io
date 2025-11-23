@@ -54,17 +54,26 @@
 
                     <h2>Publications</h2>
 
-                    <div class="list-group">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col"><strong>Year</strong></th>
+                                <th scope="col"><strong>Title</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                        {% for pub in top_pubs %}
+                            {% for pub in pubs|sort(attribute="date", reverse=True)|batch(5)|first %}
+                            
+                                <tr onclick="window.location='{{ pub.url }}';" style="cursor: pointer;">
+                                    <td>{{ pub.date.year|e }}</th>
+                                    <td>{{ pub.title|e }}</td>
+                                </tr>
 
-                        <a href="{{ pub.url }}" class="list-group-item list-group-item-action">
-                            {{ pub.title|e }}
-                        </a>
-
-                        {% endfor %}
-                        
-                    </div>
+                            {% endfor %}
+                            
+                        </tbody>
+                    </table>
 
                 </div>
 
@@ -72,17 +81,26 @@
 
                     <h2>Posts</h2>
 
-                    <div class="list-group">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col"><strong>Year</strong></th>
+                                <th scope="col"><strong>Title</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                        {% for post in top_posts %}
+                            {% for post in posts|sort(attribute="date", reverse=True)|batch(5)|first %}
+                            
+                                <tr onclick="window.location='{{ post.url }}';" style="cursor: pointer;">
+                                    <td>{{ post.date.year|e }}</th>
+                                    <td>{{ post.title|e }}</td>
+                                </tr>
 
-                        <a href="{{ post.url }}" class="list-group-item list-group-item-action">
-                            {{ post.title|e }}
-                        </a>
-
-                        {% endfor %}
-                        
-                    </div>
+                            {% endfor %}
+                            
+                        </tbody>
+                    </table>
 
                 </div>
 

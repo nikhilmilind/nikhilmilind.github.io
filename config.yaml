@@ -4,6 +4,7 @@ index_template: index.html
 page_template: page.html
 pub_template: pub.html
 post_template: post.html
+publications_template: publications.html
 
 output_dir: output/
 templates_dir: templates/
@@ -13,5 +14,4 @@ site_name: Nikhil Milind
 page_title: Nikhil Milind
 
 pages:
- - publications
  - data
