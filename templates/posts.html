@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="container-md" style="margin-top: 5em; max-width: 800px;">
+
+        <h2>Posts</h2>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col"><strong>Date</strong></th>
+                    <th scope="col"><strong>Title</strong></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for post in posts|sort(attribute="date", reverse=True) %}
+                
+                    <tr onclick="window.location='{{ post.url }}';" style="cursor: pointer;">
+                        <td>{{ post.date.strftime('%-d %b %Y')|e }}</th>
+                        <td>{{ post.title|e }}</td>
+                    </tr>
+
+                {% endfor %}
+                
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock content %}

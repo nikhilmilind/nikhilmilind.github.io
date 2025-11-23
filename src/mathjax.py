@@ -11,7 +11,7 @@ class MathJaxPattern(markdown.inlinepatterns.Pattern):
 
 class MathJaxExtension(markdown.extensions.Extension):
     def extendMarkdown(self, md):
-        md.inlinePatterns.register(MathJaxPattern(r'(?<!\\)(\$\$?)(.+?)\2', md), 'mathjax', 175)
+        md.inlinePatterns.register(MathJaxPattern(r'(?<!\\)(\$\$?)(.+?)\2', md), 'mathjax', 185)
 
 
 def makeExtension():

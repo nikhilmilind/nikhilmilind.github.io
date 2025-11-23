@@ -5,6 +5,7 @@ page_template: page.html
 pub_template: pub.html
 post_template: post.html
 publications_template: publications.html
+posts_template: posts.html
 
 output_dir: output/
 templates_dir: templates/

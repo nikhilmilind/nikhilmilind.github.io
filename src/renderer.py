@@ -70,6 +70,23 @@ def render_publications(config, base_context, env):
         f_out.write(rendered_html)
 
 
+def render_posts(config, base_context, env):
+
+    posts_template = config['posts_template']
+    template = env.get_template(posts_template)
+
+    context = dict()
+    context['config'] = config
+    context = context | base_context
+    context['page'] = 'posts'
+
+    rendered_html = template.render(context)
+
+    output_dir = config['output_dir']
+    with open(f'{output_dir}/{posts_template}', 'w') as f_out:
+        f_out.write(rendered_html)
+
+
 def render_page(config, base_context, env, page):
 
     page_template = config['page_template']
@@ -147,6 +164,9 @@ def render_output():
 
     # Render the publications list page
     render_publications(config, base_context, env)
+
+    # Render the posts list page
+    render_posts(config, base_context, env)
 
     # Render all pages
     for page in config['pages']:
