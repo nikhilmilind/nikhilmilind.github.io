@@ -62,7 +62,7 @@ operations are written using their API. This ends up being simple because `jax` 
 replacements for functions in `numpy` and `scipy`. Here is a simple implementation that sets up a
 grid and integrates in log space.
 
-```{python}
+```python
 import jax
 import jax.numpy as jnp
 
@@ -116,35 +116,126 @@ class BooleLogIntegrator:
 ## Post Script on Integration Bounds
 
 Numerical quadrature methods are built for finite intervals $[a, b]$ because we use finite sums to
-approximate the integral. However, we are often interested in taking integrals over $\mathbb{R}$. For this purpose, consider the sigmoid transform
+approximate the integral. However, we are often interested in taking integrals over $\mathbb{R}$.
+For this purpose, consider the sigmoid transform
 
 $$
-u = \frac{\exp (x)}{1 + \exp (x)} = \mathrm{sigmoid}(x) \,,
+u = \frac{\exp (k^{-1} x)}{1 + \exp (k^{-1} x)} = \mathrm{sigmoid}(k^{-1} x) \,,
 $$
 
 with inverse mapping
 
 $$
-x = \log \left( \frac{u}{1-u} \right) = \mathrm{logit}(u)
+x = k \log \left( \frac{u}{1-u} \right) = k \mathrm{logit}(u)
 $$
 
 and differential
 
 $$
-dx = \frac{1}{u(1-u)} \,du \,.
+dx = \frac{k}{u(1-u)} \,du \,.
 $$
 
-Under this transformation, the interval $(-\infty, \infty)$ maps to $[-1, 1]$. Furthermore,
+Under this transformation, the interval $(-\infty, \infty)$ maps to $[0, 1]$. Furthermore,
 
 $$
-\int_{\mathbb{R}} f(x) \, dx = \int_{-1}^1 \frac{1}{u(1-u)} f \left( \mathrm{logit}(u) \right) \, du \,.
+\int_{\mathbb{R}} f(x) \, dx = \int_0^1 \frac{k}{u(1-u)} f \left( k \mathrm{logit}(u) \right) \, du \,.
 $$
 
-In log space, with a grid of equidistant points $u_1, ..., u_N$ over $[-1, 1]$,
+In log space, with a grid of equidistant points $u_1, ..., u_N$ over $[0, 1]$,
 
 $$
 \begin{align}
-    \log \int_{\mathbb{R}} f(x) \, dx &= \log \int_{-1}^1 \frac{1}{u(1-u)} f \left( \mathrm{logit} (u) \right) \, du \\
-    &\approx \mathrm{LogSumExp} \left\lbrace \log w_i - \log u_i - \log (1 - u_i) + \log f \left( \mathrm{logit} (u_i) \right) + \log \Delta u \right\rbrace_{i=1}^N \,.
+    \log \int_{\mathbb{R}} f(x) \, dx &= \log \int_0^1 \frac{k}{u(1-u)} f \left( k \mathrm{logit} 
+    (u) \right) \, du \\
+    &\approx \mathrm{LogSumExp} \left\lbrace \log w_i + \log k - \log u_i - \log (1 - u_i) + \log f \left( 
+        k \mathrm{logit} (u_i) \right) + \log \Delta u \right\rbrace_{i=1}^N \,.
 \end{align}
 $$
+
+## Example
+
+We can use a simple normal-normal model
+
+$$
+\begin{align}
+    x_i \mid z_i &\sim \mathcal{N} (z_i, 1) \\
+    z_i \mid \theta &\sim \mathcal{N} (\theta, 1)
+\end{align}
+$$
+
+as an example. First, we need to confirm that the quadrature rule has been implemented correctly. We
+can use properties of the normal distribution to get the analytical form of the evidence. First,
+I write $z_i$ and $x_i$ as
+
+$$
+\begin{gather}
+    z_i = \theta + \delta_i \,, \quad \delta_i \sim \mathcal{N}(0, 1) \\
+    x_i = z_i + \epsilon_i \,, \quad \epsilon_i \sim \mathcal{N}(0, 1) \,.
+\end{gather}
+$$
+
+Then, it becomes clear that
+
+$$
+x_i \mid \theta \sim \mathcal{N}(\theta, 2) \,.
+$$
+
+The log evidence is then
+
+$$
+\log \prod_{i=1}^n p(x_i \mid \theta) = -\sum_{i=1}^n \frac{1}{2} \log (4\pi) + \frac{1}{4}(x_i - \theta)^2
+$$
+
+I simulated some data under this model using the following code.
+
+```python
+theta = jnp.array(5.0)
+
+key = jax.random.key(42)
+z = jax.random.normal(key, 100) + theta
+
+use_key, key = jax.random.split(key)
+x = jax.random.normal(use_key, 100) + z
+```
+
+I then estimate the log evidence using quadrature, and compare it to our analytic expectations.
+
+```python
+import jax.scipy as jsp
+
+def log_integrand(u, x, theta, k=100):
+    k_logit_u = k * (jnp.log(u) - jnp.log(1 - u))
+    log_likelihood = jsp.stats.norm.logpdf(x, loc=k_logit_u, scale=1)
+    log_prior = jsp.stats.norm.logpdf(k_logit_u, loc=theta, scale=1)
+    return log_likelihood + log_prior + jnp.log(k) - jnp.log(u) - jnp.log(1 - u) 
+
+integrator = BooleLogIntegrator(1001, (1E-6, 1.0 - 1E-6))
+print(integrator.integrate(lambda u: log_integrand(u, x[0], theta)))
+
+print(jsp.stats.norm.logpdf(x[0], loc=theta, scale=jnp.sqrt(2)))
+```
+
+The output from both is around -1.43 for both, so the quadrature is working as expected! Now, I should be able to ascent the log evidence using numerical gradients provided by `jax`. I used the `optax` library to perform stochastic gradient ascent on the log evidence. The resulting estimate is $\hat{\theta} \approx 5.03$, which is pretty close to the simulated $\theta = 5$. I could test the convergence using multiple simulations and building confidence intervals.
+
+```python
+import optax
+import tqdm
+
+def loss(theta, x):
+    return -integrator.integrate(lambda u: log_integrand(u, x, theta))
+
+loss_val_grad = jax.value_and_grad(loss)
+
+theta_hat = jnp.array(0.0)
+
+optimizer = optax.adam(1E-1)
+opt_state = optimizer.init(theta_hat)
+
+for i in (pbar := tqdm.trange(30)):
+   for x_obs in x:
+        loss_val, loss_grad = loss_val_grad(theta_hat, x_obs)
+        updates, opt_state = optimizer.update(loss_grad, opt_state)
+        theta_hat = optax.apply_updates(theta_hat, updates)
+
+print(theta_hat)
+```
