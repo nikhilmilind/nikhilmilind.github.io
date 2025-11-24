@@ -3,7 +3,7 @@ title: Numerical gradients through numerical integrals
 date: 2025-03-15
 ---
 
-I recently encountered a classic situation that occurs often when playing around with empirical
+I recently encountered a convergence of two numerical methods when playing around with empirical
 Bayes. I had a hierarchical model of the following type:
 
 $$
@@ -22,9 +22,8 @@ G(z \,; \theta) \, dz \,.
 $$
 
 The problem is that this integral is often analytically intractable, and we wish to evaluate it 
-numerically. However, to maximize $J(\theta)$, we also need access to the gradient 
-$\nabla_\theta J$. For example, if I am using gradient ascent on the log likelihood, I will need
-numerical gradients.
+numerically. However, to maximize $J(\theta)$ numerically, we also need access to the gradient 
+$\nabla_\theta J$.
 
 When dealing with probability distributions, we often evaluate the log probability density function
 (PDF) instead of the PDF for numerical stability. Therefore, I wanted to implement a numerical 

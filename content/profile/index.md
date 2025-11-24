@@ -18,15 +18,18 @@ linkedin: https://www.linkedin.com/in/nikhilmilind/
 
 ## About Me
 
-I am a PhD student in Jonathan Pritchard's lab at Stanford University. I am broadly interested in 
-statistical and population genetics.
+I am a PhD student in
+<a href="https://web.stanford.edu/group/pritchardlab/home.html" target="_blank">Jonathan Pritchard</a>'s
+lab at Stanford University. I am broadly interested in statistical and population genetics.
 
 I have recently been thinking about the relationship between gene dosage and complex traits. We 
 introduced the concept of the gene dosage response curve, which is a conceptual tool to think about
 these relationships using population-level or experimental data.
 
-I was previously a Master's student with [Emma Davenport](https://davenportlab.com/), where I worked
-on using functional genomics to better understand sepsis. As an undergraduate student, I worked with
-[David Aylor](https://aylorlab.wordpress.ncsu.edu/) on mouse quantitative genetics and
-[Gregory Carter](https://www.jax.org/research-and-faculty/research-labs/the-carter-lab) on
-statistical genetics approaches in Alzheimer's disease cohorts.
+I was previously a Master's student with
+<a href="https://davenportlab.com/" target="_blank">Emma Davenport</a>, where I worked on using 
+functional genomics to better understand sepsis. As an undergraduate student, I worked with
+<a href="https://aylorlab.wordpress.ncsu.edu/" target="_blank">David Aylor</a> on mouse quantitative
+genetics and
+<a href="https://www.jax.org/research-and-faculty/research-labs/the-carter-lab" target="_blank">Gregory Carter</a>
+on statistical genetics approaches in Alzheimer's disease cohorts.
