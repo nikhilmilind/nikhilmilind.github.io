@@ -153,6 +153,67 @@ $$
 \end{align}
 $$
 
+### A Gentler Transformation
+
+The sigmoid transform aggressively avoids the tails of the original integrand. A more gentle
+approach is to divide the integral into two components and use a transformation similar to
+$\frac{1}{x}$. First, I divide the integral into
+
+$$
+\int_{\mathbb{R}} f(x) \, dx = \int_{-\infty}^0 f(x) \, dx + \int_0^\infty f(x) \, dx \,.
+$$
+
+Take the second component on the interval $[0, \infty)$ and consider the transform
+
+$$
+u = \frac{1}{k^{-1} x+1} \,,
+$$
+
+with inverse mapping
+
+$$
+x = \frac{k(1-u)}{u}
+$$
+
+and differential
+
+$$
+dx = -\frac{k}{u^2} \, du \,.
+$$
+
+The interval $[0, \infty)$ maps to $[0, 1]$ under this transformation, albeit reversed. The
+transformed integral is
+
+$$
+\int_0^\infty f(x) \, dx = \int_0^1 \frac{k}{u^2} f \left( \frac{k(1-u)}{u} \right) \, du \,.
+$$
+
+Following the same steps for the other component on the interval $(-\infty, 0]$, consider the
+transform
+
+$$
+u = \frac{1}{k^{-1} x - 1} \,,
+$$
+
+with inverse mapping
+
+$$
+x = \frac{k(1+u)}{u}
+$$
+
+and differential
+
+$$
+dx = -\frac{k}{u^2} \, du \,.
+$$
+
+The interval $(-\infty, 0]$ maps to $[-1, 0]$ under this transformation, albeit reversed. The
+transformed integral is
+
+$$
+\int_{-\infty}^0 f(x) \, dx = \int_{-1}^0 \frac{k}{u^2} f \left( \frac{k(1+u)}{u} \right) \, du \,.
+$$
+
 ## Example
 
 We can use a simple normal-normal model
