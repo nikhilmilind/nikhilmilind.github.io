@@ -2,11 +2,12 @@
 preprint: true
 title: Buffering and non-monotonic behavior of gene dosage response curves for human complex traits
 authors:
- - Nikhil Milind
+ - Nikhil Milind†
  - Courtney J. Smith
  - Huisheng Zhu
- - Jeffrey P. Spence
- - Jonathan K. Pritchard
+ - Tamara Gjorgjieva
+ - Jeffrey P. Spence†
+ - Jonathan K. Pritchard†
 journal: medRxiv
 date: 2024-11-11
 doi: 10.1101/2024.11.11.24317065

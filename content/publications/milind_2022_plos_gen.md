@@ -2,8 +2,8 @@
 preprint: false
 title: Transcriptomic stratification of late-onset Alzheimer's cases reveals novel genetic modifiers of disease pathology
 authors:
- - Nikhil Milind
- - Christoph Preuss
+ - Nikhil Milind*
+ - Christoph Preuss*
  - Annat Haber
  - Guruprasad Ananda
  - Shubhabrata Mukherjee
@@ -11,7 +11,7 @@ authors:
  - Sarah Shapley
  - Benjamin A. Logsdon
  - Paul K. Crane
- - Gregory W. Carter
+ - Gregory W. Carter†
 journal: PLOS Genetics
 date: 2020-06-03
 doi: 10.1371/journal.pgen.1008775

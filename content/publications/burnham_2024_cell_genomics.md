@@ -14,8 +14,8 @@ authors:
  - Stuart McKechnie
  - Nicole Soranzo
  - Charles J. Hinds
- - Julian C. Knight
- - Emma E. Davenport
+ - Julian C. Knight†
+ - Emma E. Davenport†
 journal: Cell Genomics
 date: 2024-06-18
 doi: 10.1016/j.xgen.2024.100587

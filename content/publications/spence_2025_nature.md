@@ -2,15 +2,15 @@
 preprint: false
 title: "Specificity, length and luck drive gene rankings in association studies"
 authors:
- - Jeffrey P. Spence
- - Hakhamanesh Mostafavi
- - Mineto Ota
+ - Jeffrey P. Spence*†
+ - Hakhamanesh Mostafavi*†
+ - Mineto Ota†
  - Nikhil Milind
  - Tamara Gjorgjieva
  - Courtney J. Smith
  - Yuval B. Simons
  - Guy Sella
- - Jonathan K. Pritchard
+ - Jonathan K. Pritchard†
 journal: Nature
 date: 2025-11-05
 doi: 10.1038/s41586-025-09703-7

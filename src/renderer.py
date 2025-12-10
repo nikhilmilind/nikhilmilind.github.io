@@ -1,6 +1,6 @@
 from src.reader import load_config, read_markdown
 from src.models import load_pages, load_pubs, load_posts
-from src.filters import pub_author_fmt
+from src.filters import pub_full_fmt, pub_author_fmt
 
 import os
 import pathlib
@@ -151,6 +151,7 @@ def render_output():
 
     # Create a new Jinja environment for templating
     env = Environment(loader=FileSystemLoader(templates_dir))
+    env.filters['pub_full_fmt'] = pub_full_fmt
     env.filters['pub_author_fmt'] = pub_author_fmt
 
     # Create base context

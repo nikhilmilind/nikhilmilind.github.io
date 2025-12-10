@@ -9,6 +9,7 @@
         <table class="table table-hover">
             <thead>
                 <tr>
+                    <th scope="col"><strong>Year</strong></th>
                     <th scope="col"><strong>Citation</strong></th>
                     <th scope="col"><strong>DOI</strong></th>
                 </tr>
@@ -19,8 +20,9 @@
                 
                     {% if pub.preprint %}
 
-                        <tr onclick="window.location='{{ pub.url }}';" style="cursor: pointer;">
-                            <td>{{ pub.authors|pub_author_fmt }}. {{ pub.title|e }}. {{ pub.date.year|e }}. <i>{{ pub.journal|e }}</i>.</th>
+                        <tr>
+                            <td onclick="window.location='{{ pub.url }}';" style="cursor: pointer;">{{ pub.date.year|e }}</td>
+                            <td onclick="window.location='{{ pub.url }}';" style="cursor: pointer;">{{ pub.authors|pub_author_fmt }}. {{ pub.title|e }}. {{ pub.date.year|e }}. <i>{{ pub.journal|e }}</i>.</th>
                             <td><a href="https://doi.org/{{ pub.doi }}" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>
                         </tr>
 
@@ -36,6 +38,7 @@
         <table class="table table-hover">
             <thead>
                 <tr>
+                    <th scope="col"><strong>Year</strong></th>
                     <th scope="col"><strong>Citation</strong></th>
                     <th scope="col"><strong>DOI</strong></th>
                 </tr>
@@ -46,8 +49,9 @@
                 
                     {% if not pub.preprint %}
 
-                        <tr onclick="window.location='{{ pub.url }}';" style="cursor: pointer;">
-                            <td>{{ pub.authors|pub_author_fmt }}. {{ pub.title|e }}. {{ pub.date.year|e }}. <i>{{ pub.journal|e }}</i>.</th>
+                        <tr>
+                            <td onclick="window.location='{{ pub.url }}';" style="cursor: pointer;">{{ pub.date.year|e }}</td>
+                            <td onclick="window.location='{{ pub.url }}';" style="cursor: pointer;">{{ pub.authors|pub_author_fmt }}. {{ pub.title|e }}. {{ pub.date.year|e }}. <i>{{ pub.journal|e }}</i>.</th>
                             <td><a href="https://doi.org/{{ pub.doi }}" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>
                         </tr>
 
@@ -57,6 +61,12 @@
                 
             </tbody>
         </table>
+
+        * Equal Contribution
+
+        <br />
+
+        † Corresponding Authors
 
     </div>
 
