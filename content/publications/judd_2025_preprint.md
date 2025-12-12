@@ -6,7 +6,7 @@ authors:
  - Jeffrey P. Spence†
  - Nikhil Milind
  - Linda Kachuri
- - John S Witte
+ - John S. Witte
  - Jonathan K. Pritchard†
 journal: bioRxiv
 date: 2025-12-09
