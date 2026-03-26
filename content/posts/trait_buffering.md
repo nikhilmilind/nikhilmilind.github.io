@@ -3,8 +3,6 @@ title: Trait buffering of gene dosage response curves
 date: 2026-03-25
 ---
 
-<!-- Trait Buffering Model and Inference (D and E, I.6) -->
-
 In the first part of my thesis, I explored the properties of gene dosage response curves (GDRCs)
 using loss-of-function (LoF) variants and duplications in the UK Biobank. Much of this work has been
 described in a [pre-print](https://doi.org/10.1101/2024.11.11.24317065). This is one of multiple
