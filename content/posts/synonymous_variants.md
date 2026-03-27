@@ -1,5 +1,5 @@
 ---
-title: Assessing burden test inflation with synonymous variants and improving 
+title: Assessing burden test inflation with synonymous variants
 date: 2026-03-24
 ---
 
