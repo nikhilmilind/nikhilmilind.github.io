@@ -379,8 +379,13 @@ information matrix. The gradient of the log likelihood function with respect to
 $\overline{\boldsymbol{\gamma}}$ is
 $$
 \begin{aligned}
-    \nabla_{\overline{\boldsymbol{\upgamma}}} \, \ell &= \nabla_{\overline{\boldsymbol{\upgamma}}} \, \left[  - \frac{1}{2} \left( \mathbf{U}^\top \hat{\mathbf{S}}^{-1} \hat{\boldsymbol{\upgamma}} - \mathbf{A} \overline{\boldsymbol{\upgamma}} \right)^\top \mathbf{K}^{-1} \left( \mathbf{U}^\top \hat{\mathbf{S}}^{-1} \hat{\boldsymbol{\upgamma}} - \mathbf{A} \overline{\boldsymbol{\upgamma}} \right) \right]\\
-    &= \mathbf{A}^\top \mathbf{K}^{-1} \left( \mathbf{U}^\top \hat{\mathbf{S}}^{-1} \hat{\boldsymbol{\upgamma}} - \mathbf{A} \overline{\boldsymbol{\upgamma}} \right) \,.
+    \nabla_{\overline{\boldsymbol{\upgamma}}} \, \ell &= \nabla_{\overline{\boldsymbol{\upgamma}}} 
+    \, \left[  - \frac{1}{2} \left( \mathbf{U}^\top \hat{\mathbf{S}}^{-1} 
+    \hat{\boldsymbol{\upgamma}} - \mathbf{A} \overline{\boldsymbol{\upgamma}} \right)^\top 
+    \mathbf{K}^{-1} \left( \mathbf{U}^\top \hat{\mathbf{S}}^{-1} \hat{\boldsymbol{\upgamma}} - 
+    \mathbf{A} \overline{\boldsymbol{\upgamma}} \right) \right]\\
+    &= \mathbf{A}^\top \mathbf{K}^{-1} \left( \mathbf{U}^\top \hat{\mathbf{S}}^{-1} 
+    \hat{\boldsymbol{\upgamma}} - \mathbf{A} \overline{\boldsymbol{\upgamma}} \right) \,.
 \end{aligned}
 $$
 
