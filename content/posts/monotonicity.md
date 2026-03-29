@@ -373,9 +373,9 @@ $$
 $$
 
 For maximum likelihood estimation of $\boldsymbol{\uptheta}$ and $\boldsymbol{\upgamma}$, we use 
-natural gradient ascent \parencite{amari_natural_1998}. This is an optimization approach that uses 
-both first- and second-order information about the log likelihood via the gradient and Fisher 
-information matrix. The gradient of the log likelihood function with respect to 
+natural gradient ascent [[3](https://doi.org/10.1162/089976698300017746)]. This is an optimization 
+approach that uses both first- and second-order information about the log likelihood via the 
+gradient and Fisher information matrix. The gradient of the log likelihood function with respect to 
 $\overline{\boldsymbol{\gamma}}$ is
 $$
 \begin{aligned}
@@ -433,7 +433,7 @@ $$
 $$
 
 The Fisher information for multivariate normal distributions has a special form 
-[[3](https://doi.org/10.1145/2725494.2725510)] such that the mean and covariance parameters do not 
+[[4](https://doi.org/10.1145/2725494.2725510)] such that the mean and covariance parameters do not 
 share any information,
 $$
 \boldsymbol{\mathcal{I}} \left( \boldsymbol{\uptheta}, \boldsymbol{\upomega} \right) = 
@@ -465,7 +465,7 @@ $$
 
 Natural gradient ascent involves Newton-Raphson updates with the Fisher information matrix. A 
 dampening parameter $0 < \alpha_t \leq 1$ is chosen using a backtracking line search
-[[4](https://projecteuclid.org/journals/pacific-journal-of-mathematics/volume-16/issue-1/Minimization-of-functions-having-Lipschitz-continuous-first-partial-derivatives/pjm/1102995080.full)] 
+[[5](https://projecteuclid.org/journals/pacific-journal-of-mathematics/volume-16/issue-1/Minimization-of-functions-having-Lipschitz-continuous-first-partial-derivatives/pjm/1102995080.full)] 
 at each iteration to improve stability and serve as a stopping condition,
 $$
 \begin{aligned}
@@ -486,7 +486,7 @@ and sum them up because effect estimates are assumed to be independent across ch
 derivatives 
 $\frac{\partial \overline{\boldsymbol{\upgamma}}}{\partial \theta_i}$ and 
 $\frac{\partial \mathbf{K}}{\partial \omega_i}$ are computed using automatic differentiation 
-[[5](https://mlsys.org/Conferences/doc/2018/146.pdf),[6](http://arxiv.org/abs/1811.05031)].
+[[6](https://mlsys.org/Conferences/doc/2018/146.pdf),[7](http://arxiv.org/abs/1811.05031)].
 
 ### Uncertainty Estimation
 
@@ -586,7 +586,7 @@ $$
 $$
 
 We fit this non-linear, errors-in-variables model using the orthogonal distance regression routines 
-implemented in `scipy` [[7](https://doi.org/10.1038/s41592-019-0686-2)]. The estimates from the two
+implemented in `scipy` [[8](https://doi.org/10.1038/s41592-019-0686-2)]. The estimates from the two
 methods were broadly concordant, with a confidently positive estimate for the regression coefficient 
 (Figure 3).
 
