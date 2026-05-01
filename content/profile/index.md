@@ -4,6 +4,9 @@ position: PhD Candidate
 institution: Stanford University
 photo: /static/img/profile.jpg
 education:
+    - degree: M.S. in Statistics
+      year: 2026
+      institution: Stanford University
     - degree: M.Phil. in Biological Sciences
       year: 2022
       institution: University of Cambridge | Wellcome Sanger Institute
