@@ -32,7 +32,7 @@ jobs:
         run: ls ${{ github.workspace }}
 
       - name: Configure conda
-        uses: conda-incubator/setup-miniconda@v3
+        uses: conda-incubator/setup-miniconda@v4
         with:
           environment-file: env.yaml
           activate-environment: academic
