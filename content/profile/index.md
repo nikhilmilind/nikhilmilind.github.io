@@ -34,5 +34,5 @@ I was previously a Master's student with
 functional genomics to better understand sepsis. As an undergraduate student, I worked with
 <a href="https://aylorlab.wordpress.ncsu.edu/" target="_blank">David Aylor</a> on mouse quantitative
 genetics and
-<a href="https://www.jax.org/research-and-faculty/research-labs/the-carter-lab" target="_blank">Gregory Carter</a>
+<a href="https://scholar.google.com/citations?user=-P5aTcYAAAAJ" target="_blank">Gregory Carter</a>
 on statistical genetics approaches in Alzheimer's disease cohorts.
