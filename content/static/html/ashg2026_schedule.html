@@ -270,7 +270,8 @@
       function posterList(b) {
         const wrap = el("div");
         const list = el("div", "list-group list-group-flush poster-list border-top border-bottom");
-        b.posters.forEach((p, k) => {
+        const byBoard = (x, y) => String(x.board).localeCompare(String(y.board), undefined, { numeric: true });
+        [...b.posters].sort(byBoard).forEach((p, k) => {
           const item = el("button", "list-group-item list-group-item-action" + (p.own ? " own" : ""));
           item.type = "button";
           item.append(el("span", "board mono", p.board));
