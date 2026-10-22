@@ -4,63 +4,65 @@
 
     <div class="container-md" style="margin-top: 5em; max-width: 800px;">
 
-        <h2>Pre-Prints</h2>
+        {% set preprints = pubs|selectattr("preprint")|list %}
+        {% if preprints|length > 0 %}
 
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col"><strong>Year</strong></th>
-                    <th scope="col"><strong>Citation</strong></th>
-                    <th scope="col"><strong>DOI</strong></th>
-                </tr>
-            </thead>
-            <tbody>
+            <h2>Pre-Prints</h2>
 
-                {% for pub in pubs|sort(attribute="date", reverse=True) %}
-                
-                    {% if pub.preprint %}
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col"><strong>Year</strong></th>
+                        <th scope="col"><strong>Citation</strong></th>
+                        <th scope="col"><strong>DOI</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
 
-                        <tr>
-                            <td onclick="window.location='{{ pub.url }}';" style="cursor: pointer;">{{ pub.date.year|e }}</td>
-                            <td onclick="window.location='{{ pub.url }}';" style="cursor: pointer;">{{ pub.authors|pub_author_fmt }}. {{ pub.title|e }}. {{ pub.date.year|e }}. <i>{{ pub.journal|e }}</i>.</th>
-                            <td><a href="https://doi.org/{{ pub.doi }}" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>
-                        </tr>
+                {% for pub in preprints|sort(attribute="date", reverse=True) %}
 
-                    {% endif %}
+                    <tr>
+                        <td onclick="window.location='{{ pub.url }}';" style="cursor: pointer;">{{ pub.date.year|e }}</td>
+                        <td onclick="window.location='{{ pub.url }}';" style="cursor: pointer;">{{ pub.authors|pub_author_fmt }}. {{ pub.title|e }}. {{ pub.date.year|e }}. <i>{{ pub.journal|e }}</i>.</th>
+                        <td><a href="https://doi.org/{{ pub.doi }}" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>
+                    </tr>
+                    
+                {% endfor %}
+                    
+                </tbody>
+            </table>
+
+        {% endif %}
+
+        {% set publications = pubs|rejectattr("preprint")|list %}
+        {% if publications|length > 0 %}
+
+            <h2>Publications</h2>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col"><strong>Year</strong></th>
+                        <th scope="col"><strong>Citation</strong></th>
+                        <th scope="col"><strong>DOI</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                {% for pub in publications|sort(attribute="date", reverse=True) %}
+
+                    <tr>
+                        <td onclick="window.location='{{ pub.url }}';" style="cursor: pointer;">{{ pub.date.year|e }}</td>
+                        <td onclick="window.location='{{ pub.url }}';" style="cursor: pointer;">{{ pub.authors|pub_author_fmt }}. {{ pub.title|e }}. {{ pub.date.year|e }}. <i>{{ pub.journal|e }}</i>.</th>
+                        <td><a href="https://doi.org/{{ pub.doi }}" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>
+                    </tr>
 
                 {% endfor %}
-                
-            </tbody>
-        </table>
+            
+                </tbody>
+            </table>
 
-        <h2>Publications</h2>
-
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col"><strong>Year</strong></th>
-                    <th scope="col"><strong>Citation</strong></th>
-                    <th scope="col"><strong>DOI</strong></th>
-                </tr>
-            </thead>
-            <tbody>
-
-                {% for pub in pubs|sort(attribute="date", reverse=True) %}
-                
-                    {% if not pub.preprint %}
-
-                        <tr>
-                            <td onclick="window.location='{{ pub.url }}';" style="cursor: pointer;">{{ pub.date.year|e }}</td>
-                            <td onclick="window.location='{{ pub.url }}';" style="cursor: pointer;">{{ pub.authors|pub_author_fmt }}. {{ pub.title|e }}. {{ pub.date.year|e }}. <i>{{ pub.journal|e }}</i>.</th>
-                            <td><a href="https://doi.org/{{ pub.doi }}" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>
-                        </tr>
-
-                    {% endif %}
-
-                {% endfor %}
-                
-            </tbody>
-        </table>
+        {% endif %}
 
         * Equal Contribution
 
